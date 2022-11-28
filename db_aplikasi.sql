@@ -16,6 +16,21 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_aplikasi` /*!40100 DEFAULT CHARACTER
 
 USE `db_aplikasi`;
 
+/*Table structure for table `tb_hasil` */
+
+DROP TABLE IF EXISTS `tb_hasil`;
+
+CREATE TABLE `tb_hasil` (
+  `id_hasil` int NOT NULL AUTO_INCREMENT,
+  `id_soal_kuis` int DEFAULT NULL,
+  `id_user` int DEFAULT NULL,
+  `jawaban_benar` varchar(255) DEFAULT NULL,
+  `nilai` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id_hasil`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `tb_hasil` */
+
 /*Table structure for table `tb_kuis` */
 
 DROP TABLE IF EXISTS `tb_kuis`;
