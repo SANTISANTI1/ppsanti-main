@@ -16,21 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_aplikasi` /*!40100 DEFAULT CHARACTER
 
 USE `db_aplikasi`;
 
-/*Table structure for table `tb_hasil` */
-
-DROP TABLE IF EXISTS `tb_hasil`;
-
-CREATE TABLE `tb_hasil` (
-  `id_hasil` int NOT NULL AUTO_INCREMENT,
-  `id_soal_kuis` int DEFAULT NULL,
-  `id_user` int DEFAULT NULL,
-  `jawaban_benar` varchar(255) DEFAULT NULL,
-  `nilai` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (`id_hasil`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `tb_hasil` */
-
 /*Table structure for table `tb_kuis` */
 
 DROP TABLE IF EXISTS `tb_kuis`;
@@ -71,6 +56,19 @@ insert  into `tb_lagu`(`id_lagu`,`judul_lagu`,`tanggal`,`link_lagu`) values
 (21,'Head shoulger knees and toes','2022-11-13 15:29:41','https://www.youtube.com/embed/1io44ucVgtI'),
 (22,'Lagu Alphabet Bahasa Inggris','2022-11-13 15:31:47','https://www.youtube.com/embed/LGjC_yiaTjc'),
 (24,'Mengenal Buah-Buahan Dalam Bahasa Inggris','2022-11-13 15:34:16','https://www.youtube.com/embed/0jHDwRzDEk8');
+
+/*Table structure for table `tb_nilai` */
+
+DROP TABLE IF EXISTS `tb_nilai`;
+
+CREATE TABLE `tb_nilai` (
+  `id_nilai` int NOT NULL AUTO_INCREMENT,
+  `id_siswa` int DEFAULT NULL,
+  `nilai` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id_nilai`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `tb_nilai` */
 
 /*Table structure for table `tb_user` */
 
