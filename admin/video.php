@@ -2,6 +2,8 @@
 include('template/header.php');
 include('template/navbar.php');
 include('template/sidebar.php');
+
+
 ?>
 
 <!-- Main Content -->

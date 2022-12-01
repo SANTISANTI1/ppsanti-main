@@ -8,7 +8,12 @@ include('template/sidebar.php');
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Data Lagu</h1>
+            <h1>Data Kuis</h1>
+            <div class="section-header-button">
+                <a href="kuis-tambah.php" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+            </div>
         </div>
 
         <div class="section-body">
@@ -29,99 +34,38 @@ include('template/sidebar.php');
                                     <thead>
                                         <tr>
                                             <th class="text-center">
-                                                #
+                                                No.
                                             </th>
-                                            <th>Task Name</th>
-                                            <th>Progress</th>
-                                            <th>Members</th>
-                                            <th>Due Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Soal Kuis</th>
+                                            <th>Jawab A</th>
+                                            <th>Jawab B</th>
+                                            <th>Jawab C</th>
+                                            <th>Jawaban</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>Create a mobile app</td>
-                                            <td class="align-middle">
-                                                <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                                                    <div class="progress-bar bg-success" data-width="100%"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian">
-                                            </td>
-                                            <td>2018-01-20</td>
-                                            <td>
-                                                <div class="badge badge-success">Completed</div>
-                                            </td>
-                                            <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>Redesign homepage</td>
-                                            <td class="align-middle">
-                                                <div class="progress" data-height="4" data-toggle="tooltip" title="0%">
-                                                    <div class="progress-bar" data-width="0"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Nur Alpiana">
-                                                <img alt="image" src="../assets/img/avatar/avatar-3.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Hariono Yusup">
-                                                <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Bagus Dwi Cahya">
-                                            </td>
-                                            <td>2018-04-10</td>
-                                            <td>
-                                                <div class="badge badge-info">Todo</div>
-                                            </td>
-                                            <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                3
-                                            </td>
-                                            <td>Backup database</td>
-                                            <td class="align-middle">
-                                                <div class="progress" data-height="4" data-toggle="tooltip" title="70%">
-                                                    <div class="progress-bar bg-warning" data-width="70%"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                                                <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Hasan Basri">
-                                            </td>
-                                            <td>2018-01-29</td>
-                                            <td>
-                                                <div class="badge badge-warning">In Progress</div>
-                                            </td>
-                                            <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                4
-                                            </td>
-                                            <td>Input data</td>
-                                            <td class="align-middle">
-                                                <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                                                    <div class="progress-bar bg-success" data-width="100%"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                                                <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Isnap Kiswandi">
-                                                <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Yudi Nawawi">
-                                                <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Khaerul Anwar">
-                                            </td>
-                                            <td>2018-01-16</td>
-                                            <td>
-                                                <div class="badge badge-success">Completed</div>
-                                            </td>
-                                            <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                        </tr>
+                                        <?php
+                                        
+                                        $no = 1;
+                                        $kuis = mysqli_query($koneksi, "SELECT * From tb_kuis order by id_kuis DESC");
+                                        while ($data = mysqli_fetch_array($kuis)) {
+                                        ?>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <?= $no++; ?>
+                                                </td>
+                                                <td><?= $data['soal_kuis']; ?></td>
+                                                <td><?= $data['jawab_a'] ?></td>
+                                                <td><?= $data['jawab_b'] ?></td>
+                                                <td><?= $data['jawab_c'] ?></td>
+                                                <td><?= $data['jawaban'] ?></td>
+                                                <td class="text-center">
+                                                    <a href="kuis-edit.php?id=<?= $data['id_kuis'] ?>" class="btn btn-success btn-hapus"><i class="fas fa-edit"></i> Ubah</a>
+                                                    <a href="kuis-hapus.php?id=<?= $data['id_kuis'] ?>" class="btn btn-danger btn-hapus"><i class="fas fa-trash"></i> Hapus</a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

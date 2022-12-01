@@ -38,7 +38,7 @@ include('template/sidebar.php');
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tanggal</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="tanggal" class="form-control datepicker">
+                                        <input type="text" name="tanggal" class="form-control datetimepicker">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
@@ -60,7 +60,7 @@ include('template/sidebar.php');
                             $judul = $_POST['judul'];
                             $tanggal = $_POST['tanggal'];
                             $link = $_POST['link'];
-                            $query = mysqli_query($koneksi, "INSERT INTO tb_lagu VALUES(null,'$tanggal','$judul','$link')");
+                            $query = mysqli_query($koneksi, "INSERT INTO tb_lagu VALUES(null,'$judul','$tanggal','$link')");
                             if ($query) {
                                 echo "<script>alert('Data Berhasil Ditambahkan');window.location='lagu.php';</script>";
                             } else {
