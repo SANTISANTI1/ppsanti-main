@@ -16,113 +16,116 @@ include('template/navbar.php');
             <center><img alt="image" src="../assets/img/bg-siswa.png" width="500px" style="margin-bottom:10px;"></center>
         </div> -->
 
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                <center>
-                <a href="dashboard.php" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-                <h1>Back to Dashboard</h1>
-                </center>
-                </div>
-                <div class="card-body">
-
-                <div class="tab-content tab-bordered" id="myTabContent6">
-                        <div class="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
-
-                        <div class="row">
-                            <form action="" method="POST">
-                                
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <a href="dashboard.php" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                            <h1>Back to Dashboard</h1>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="POST">
                             <?php
-                                $no = 1;
-                                $noo = 1;
-                                $kuis = mysqli_query($koneksi, "SELECT * from tb_kuis order by id_kuis desc");
-                                $total_soal = mysqli_num_rows($kuis);
-                                while ($data = mysqli_fetch_array($kuis)) {
-                                    
+                            $no = 1;
+                            $noo = 1;
+                            $kuis = mysqli_query($koneksi, "SELECT * from tb_kuis order by id_kuis desc");
+                            $total_soal = mysqli_num_rows($kuis);
+                            while ($data = mysqli_fetch_array($kuis)) {
+
                             ?>
-                            
-                            
-                            <div class="container mt-5">
-                                            <div class="d-flex justify-content-center row">
-                                                <div class="col-md-10 col-lg-10">
-                                                    <div class="border">
-                                                        <div class="question bg-white p-3 border-bottom">
-                                                            <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                                                <h4>Quiz</h4><span>(<?= $noo++ . " of " . $total_soal; ?>)</span>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="question bg-white p-3 border-bottom">
-                                                            <div class="d-flex flex-row align-items-center question-title">
-                                                                <h3 class="text-danger"><?= $no++; ?></h3>
-                                                                <h5 class="mt-1 ml-2"><?= $data['soal_kuis']; ?></h5><br>
-                                                            </div>
-                                                            <div class="ans ml-2">
-                                                                <input type="radio" value="a" name="jawaban['$data['id_kuis']']"> <span>
-                                                                    <td><?= $data['jawab_a'] ?>
-                                                                </span>
-                                                            </div>
-                                                            <div class="ans ml-2">
-                                                                <input type="radio" value="b" name="jawaban['$data['id_kuis']']"> <span>
-                                                                    <td><?= $data['jawab_b'] ?></span>
-                                                            </div>
-                                                            <div class="ans ml-2">
-                                                                <input type="radio" value="c" name="jawaban['$data['id_kuis']']"> <span>
-                                                                    <td><?= $data['jawab_c'] ?></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <?php } ?>
-                                                    </div>
-                                                    <div class="card-footer text-center">
-                                                        <button class="btn btn-primary" type="submit" name="nilai">Score</button>
-                                                    </div>
-                                                        </form>
-                                                        <?php
-                                                        if (isset($_POST['nilai'])) {  
-                                                            $jawaban = $_POST['jawaban'];
-                                                            $benar   = 0;
-                                                            // echo "<script>alert('Anda menjawab');window.location='dashboard.php'</script>";
-                                                            if (count($jawaban) < 1) {
-                                                                echo "<script>alert('Anda belum menjawab');window.location='dashboard.php'</script>";
-                                                            } else {
-                                                                foreach ($jawaban as $no => $nilai) {
-                                                                    $data_soal = mysqli_query($koneksi, "SELECT * FROM soal_kuis WHERE no=$no");
-                                                                    $data_jawab = mysqli_fetch_array($data_soal);
-                                                                    if ($data_jawab['jawaban'] == $nilai) {
-                                                                        $benar = $benar + 1;
-                                                                    }
-                                                                }
-                                                                echo $benar;
-                                                                $jumlah_soal = mysqli_query($koneksi, "SELECT count (*) FROM soal_kuis");
-                                                                $jum_soal = mysqli_fetch_array($jumlah_soal, 0);
-                                                                $nilai_per_soal = 100 / $jum_soal;
-                                                                $jawaban_salah = $jum_soal - $benar;
-                                                                $presentase_benar = round($benar / $jum_soal * 100, 2) . "%";
-                                                                $presentase_salah = round($jawaban_salah / $jum_soal * 100, 2) . "%";
-                                                                echo "<h1>HASIL JAWABAN ANDA : </h1>";
-                                                                echo "<br>PRESENTASE JAWABAN SALAH : " . $presentase_salah;
-                                                                echo "<h2>Nilai :" . $nilai_per_soal * $benar . "</h2";
-                                                            }
-                                                        }
-
-                                                        
-                                                        ?>
-                                                </div>
-
-                        </div>
-                        </div>
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h4><?= $data['soal_kuis']; ?></h4>
+                                        <div class="card-header-action">
+                                            <label class="btn btn-primary">
+                                                (<?= $noo++ . " of " . $total_soal; ?>)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-sm-9">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jawaban[<?= $data['id_kuis']; ?>]" value="a">
+                                                <label class="form-check-label">
+                                                    <?= $data['jawab_a'] ?>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jawaban[<?= $data['id_kuis']; ?>]" value="b">
+                                                <label class="form-check-label">
+                                                    <?= $data['jawab_b'] ?>
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jawaban[<?= $data['id_kuis']; ?>]" value="c">
+                                                <label class="form-check-label">
+                                                    <?= $data['jawab_c'] ?>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-lg btn-primary" type="submit" name="finish">Finish</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-4">
+                <div class="card card-success">
+                    <div class="card-header text-center">
+                        <h3>Nilai Tertinggi yang Pernah Kamu Capai</h3>
+                    </div>
+                    <div class="card-body">
+                        <h1><?php
+                            $id = $_SESSION['id_user'];
+                            $score = mysqli_query($koneksi, "SELECT MAX(hasil) as hasil from tb_nilai where id_siswa = $id");
+                            $data = mysqli_fetch_array($score);
+                            if ($data <= 0) {
+                                echo "0";
+                            } else {
+                                echo $data['hasil'];
+                            }
+                            ?></h1>
+                    </div>
+                </div>
+            </div>
         </div>
 </div>
-
-    <div class="section-body">
-    </div>
-    </section>
+</section>
 </div>
 
 <?php
 
+if (isset($_POST['finish'])) {
+    $id_siswa = $_SESSION['id_user'];
+    $jawaban = $_POST['jawaban'];
+    $benar = 0;
+    $salah = 0;
+    $kosong = 0;
+    foreach ($jawaban as $key => $value) {
+        $cek_jawaban = mysqli_query($koneksi, "SELECT * from tb_kuis where id_kuis='$key' and jawaban='$value'");
+        if (mysqli_num_rows($cek_jawaban) > 0) {
+            $benar++;
+        } else if ($value == "") {
+            $kosong++;
+        } else {
+            $salah++;
+        }
+    }
+    $nl = $benar * 100 / $total_soal;
+    $hasil = mysqli_query($koneksi, "INSERT INTO tb_nilai (id_nilai, id_siswa, benar, salah, kosong, hasil) VALUES (null,'$id_siswa', '$benar', '$salah', '$kosong', '$nl')");
+    if ($hasil) {
+        echo "<script>alert('Selamat Anda Telah Menyelesaikan Kuis');window.location='dashboard.php'</script>";
+    }
+}
+
 include('template/footer.php');
 
 ?>
-                            
